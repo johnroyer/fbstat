@@ -13,10 +13,21 @@ class Feed extends CI_Controller {
       );
 
    }
-   public function index()
-   {
 
-      $this->load->view('feed_overview');
+   public function index(){
+      if( $this->__isLogin() == true ){
+         $data['isLogin'] = 'true';
+         $data['logoutUrl'] = $this->fb->getLogoutUrl();
+
+         $feedUri = $this->config->item('groupId').'/feed';
+         $json = $this->fb->api($feedUri);
+         $data['json'] = $json;
+      }else{
+         $data['isLogin'] = 'false';
+         $data['loginUrl'] = $this->fb->getLoginUrl();
+      }
+
+      $this->load->view('feed_overview', $data);
    }
 
    public function Update(){
@@ -26,6 +37,22 @@ class Feed extends CI_Controller {
          'val' => time()
       );
       $this->db->update('stat', $data);
+   }
+
+   private function __isLogin(){
+      $user = $this->fb->getUser();
+      if($user){
+         try{
+            $this->fb->api('me');
+         }catch(FacebookApiException $e){
+            $user = null;
+         }
+      }
+      if($user){
+         return true;
+      }else{
+         return false;
+      }
    }
 
 }
