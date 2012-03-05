@@ -360,13 +360,15 @@ $config['proxy_ips'] = '';
 
 /*
 |--------------------------------------------------------------------------
-| Facebook App Settings
+| Facebook Settings
 |--------------------------------------------------------------------------
 |
-| Add your facebook app ID and secret here.
+| Add your facebook app ID, secret and the group page id you want to 
+| grab here.
 */
 $config['appId'] = '';
 $config['secret'] = '';
+$config['groupId'] = '';
 
 
 /* End of file config.php */
