@@ -2,6 +2,17 @@
 
 class Feed extends CI_Controller {
 
+   private $fb;
+
+   public function __construct(){
+      parent::__construct();
+      require('facebook.php');
+      $this->fb = new Facebook( array(
+         'appId' => $this->config->item('appId'), 
+         'secret' => $this->config->item('secret') )
+      );
+
+   }
    public function index()
    {
 

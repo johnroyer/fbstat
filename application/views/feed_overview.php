@@ -8,8 +8,12 @@
 
 <body>
    
+   <?php if( $isLogin == 'true' ): ?>
+
    <h2>Not Logged in</h2>
    <blockquote>Please login first.</blockquote>
+
+   <?php else: ?>
 
    <h2>Welcome</h2>
    <blockquote>Hello, ______ 
@@ -28,6 +32,8 @@
       <div class="feeddata">
          <pre>{feed_data}</pre>
       </div>
+
+   <?php endif; ?>
 
 </body>
 </html>
