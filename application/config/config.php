@@ -360,11 +360,10 @@ $config['proxy_ips'] = '';
 
 /*
 |--------------------------------------------------------------------------
-| Reverse Proxy IPs
+| Facebook App Settings
 |--------------------------------------------------------------------------
 |
-| If your server is behind a reverse proxy, you must whitelist the proxy IP
-| addresses from which CodeIgniter should trust the HTTP_X_FORWARDED_FOR
+| Add your facebook app ID and secret here.
 */
 $config['appId'] = '';
 $config['secret'] = '';
