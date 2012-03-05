@@ -8,10 +8,10 @@
 
 <body>
    
-   <?php if( $isLogin == 'true' ): ?>
+   <?php if( $isLogin == 'false' ): ?>
 
    <h2>Not Logged in</h2>
-   <blockquote>Please login first.</blockquote>
+   <blockquote>Please <a href="<?php echo $loginUrl; ?>">login</a> first.</blockquote>
 
    <?php else: ?>
 
@@ -19,7 +19,10 @@
    <blockquote>Hello, ______ 
       
       <p></p>
-      <p><a>Update database</a></p>
+      <p>
+         <a>Update database</a>
+         <a href="<?php echo $logoutUrl; ?>">Logout</a>
+      </p>
 
       <hr>
 
