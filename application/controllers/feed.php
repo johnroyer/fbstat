@@ -24,7 +24,9 @@ class Feed extends CI_Controller {
          $data['json'] = $json;
       }else{
          $data['isLogin'] = 'false';
-         $data['loginUrl'] = $this->fb->getLoginUrl();
+         $data['loginUrl'] = $this->fb->getLoginUrl( array(
+            'scope' => 'user_groups, friends_groups')
+         );
       }
 
       $this->load->view('feed_overview', $data);
