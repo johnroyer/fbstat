@@ -20,20 +20,20 @@
       
       <p></p>
       <p>
-         <a>Update database</a>
+         <a>Update database</a> ...... 
          <a href="<?php echo $logoutUrl; ?>">Logout</a>
       </p>
 
       <hr>
 
       <div class="navbar" style="width:500px;">
-         <div style="float:left;  width:50px;">&lt; Prev</div>
-         <div style="float:right; width:50px;">Next &gt;</div>
+         <div style="float:left;  width:50px;"><a href="prev/">&lt; Prev</a></div>
+         <div style="float:right; width:50px;"><a href="next/">Next &gt;</a></div>
       </div>
       <div style="clear: both;"></div>
 
       <div class="feeddata">
-         <pre>{feed_data}</pre>
+      <pre><?php echo print_r($json); ?></pre>
       </div>
 
    <?php endif; ?>
