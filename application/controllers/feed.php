@@ -19,9 +19,9 @@ class Feed extends CI_Controller {
          $data['isLogin'] = 'true';
          $data['logoutUrl'] = $this->fb->getLogoutUrl();
 
-         $feedUri = $this->config->item('groupId').'/feed';
-         $json = $this->fb->api($feedUri);
-         $data['json'] = $json;
+         $data['json'] = $this->__getFeed();
+
+
       }else{
          $data['isLogin'] = 'false';
          $data['loginUrl'] = $this->fb->getLoginUrl( array(
@@ -30,6 +30,32 @@ class Feed extends CI_Controller {
       }
 
       $this->load->view('feed_overview', $data);
+   }
+
+   public function next(){
+      // code...  
+   }
+
+   public function prev(){
+      // code...
+   }
+
+   private function __getFeed(){
+      $data['logoutUrl'] = $this->fb->getLogoutUrl();
+      $feedUri = $this->config->item('groupId').'/feed';
+      $json = $this->fb->api($feedUri);
+
+      //Paging
+      $page = $json['paging'];
+      $next = str_replace('https://graph.facebook.com/','',$page['next']);
+      $prev = str_replace('https://graph.facebook.com/','',$page['previous']);
+      $this->session->set_userdata( array(
+        'next' => $next,
+        'prev' => $prev )
+      );
+
+      return $json;
+ 
    }
 
    public function Update(){
