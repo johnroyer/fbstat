@@ -19,43 +19,25 @@ class Feed extends CI_Controller {
          $data['isLogin'] = 'true';
          $data['logoutUrl'] = $this->fb->getLogoutUrl();
 
-         $data['json'] = $this->__getFeed();
+         // Checking Pagination
+         if( $this->input->get('act') == "prev" ){
+            $feedUri = $this->session->userdata('prev');
+         }elseif( $this->input->get('act') == "next" ){
+            $feedUri = $this->session->userdata('next');
+         }else{
+            $feedUri = $this->config->item('groupId').'/feed';
+         }
+         $json = $this->fb->api($feedUri);
 
+         $this->__savePaging($json);
 
+         $data['json'] = $json;
       }else{
          $data['isLogin'] = 'false';
-         $data['loginUrl'] = $this->fb->getLoginUrl( array(
-            'scope' => 'user_groups, friends_groups')
-         );
+         $data['loginUrl'] = $this->fb->getLoginUrl();
       }
 
       $this->load->view('feed_overview', $data);
-   }
-
-   public function next(){
-      // code...  
-   }
-
-   public function prev(){
-      // code...
-   }
-
-   private function __getFeed(){
-      $data['logoutUrl'] = $this->fb->getLogoutUrl();
-      $feedUri = $this->config->item('groupId').'/feed';
-      $json = $this->fb->api($feedUri);
-
-      //Paging
-      $page = $json['paging'];
-      $next = str_replace('https://graph.facebook.com/','',$page['next']);
-      $prev = str_replace('https://graph.facebook.com/','',$page['previous']);
-      $this->session->set_userdata( array(
-        'next' => $next,
-        'prev' => $prev )
-      );
-
-      return $json;
- 
    }
 
    public function Update(){
@@ -81,6 +63,21 @@ class Feed extends CI_Controller {
       }else{
          return false;
       }
+   }
+
+   private function __savePaging($json){
+      if( array_key_exists('paging',$json) ){
+         $page = $json['paging'];
+         $prev = str_replace('https://graph.facebook.com/','',$page['previous']);
+         $next = str_replace('https://graph.facebook.com/','',$page['next']);
+      }else{
+         $prev = $this->config->item('groupId').'/feed';
+         $next = $this->config->item('groupId').'/feed';
+      }
+      $p = array( 
+         'prev' => $prev,
+         'next' => $next );
+      $this->session->set_userdata($p);
    }
 
 }
