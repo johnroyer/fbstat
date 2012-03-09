@@ -27,8 +27,12 @@
       <hr>
 
       <div class="navbar" style="width:500px;">
-         <div style="float:left;  width:50px;"><a href="prev/">&lt; Prev</a></div>
-         <div style="float:right; width:50px;"><a href="next/">Next &gt;</a></div>
+         <div style="float:left;  width:50px;">
+            <a href="?act=prev">&lt; Prev</a>
+         </div>
+         <div style="float:right; width:50px;">
+            <a href="?act=next">Next &gt;</a>
+         </div>
       </div>
       <div style="clear: both;"></div>
 
