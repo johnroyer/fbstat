@@ -21,6 +21,7 @@ class Cleaner {
             'user_id' => $val['from']['id'],
             'message' => $val['message'], 
             'link' => array_key_exists('link',$val) ? $val['link'] : '',
+            'comment' => $this->getComments( $val['comments'] ),
             'like' => $this->getLikes( $val['likes'] )
          );
          $list[] = $art;
@@ -28,7 +29,26 @@ class Cleaner {
       return $list;
    }
 
+   private function getComments($in){
+      if( !array_key_exists('data',$in) ){
+         // No comment
+         return null;
+      }
+      $list = $in['data'];
+      foreach( $list as $val ){
+         $out[] = array(
+            'user_id' => $val['from']['id'],
+            'comment' => $val['message']
+         );
+      }
+      return $out;
+   }
+
    private function getLikes($in){
+      if( !array_key_exists('data',$in) ){
+         // Empty data set
+         return null;
+      }
       $list = $in['data'];
       foreach( $list as $val ){
          $out[] = $val['id'];
