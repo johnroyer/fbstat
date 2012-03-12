@@ -31,7 +31,10 @@ class Feed extends CI_Controller {
 
          $this->__savePaging($json);
 
-         $data['json'] = $json;
+         $this->load->library('cleaner');
+         $out = $this->cleaner->jsonClean($json);
+         $data['json'] = $out;
+
       }else{
          $data['isLogin'] = 'false';
          $data['loginUrl'] = $this->fb->getLoginUrl();
