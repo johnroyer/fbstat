@@ -44,16 +44,39 @@ class Feed extends CI_Controller {
    }
 
    public function Update(){
-      $feedUri = $this->config->item('groupId').'/feed';
       $this->load->library('cleaner');
       $this->load->model('renew');
 
-      $updated = 0;
-      $json = $this->cleaner->jsonClean( $this->fb->api($feedUri) );
-      foreach( $json as $art ){
-         $updated += $this->renew->newArticle($art);
+      $totalUpdate = 0;
+      $feedUri = $this->config->item('groupId').'/feed';
+      while( 1 ){
+         $feed = $this->fb->api($feedUri);
+         if( !array_key_exists('data', $feed) ){
+            // End of feed or invalid data
+            break;
+         }
+
+         $updated = 0;
+         $json = $this->cleaner->jsonClean( $feed );
+         foreach( $json as $art ){
+            $updated += $this->renew->newArticle($art);
+         }
+         $totalUpdate += $updated;
+
+         if( $updated == 0 ){
+            // No more updates
+            break;
+         }
+
+         // Find next Page
+         if( array_key_exists('paging', $feed) ){
+            $page = $feed['paging'];
+            $feedUri = str_replace('https://graph.facebook.com/','',$page['next']);
+         }else{
+            break;
+         }
       }
-      echo "$updated data updated";
+      echo "$totalUpdate data updated";
 
       // Stat Update
       $data = array(
