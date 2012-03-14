@@ -15,6 +15,7 @@ class Cleaner {
    }
 
    private function getArticles($in){
+      $list = array();
       foreach( $in as $val ){
          $art = array(
             'id' => $val['id'],
