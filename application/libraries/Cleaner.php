@@ -18,7 +18,7 @@ class Cleaner {
       foreach( $in as $val ){
          $art = array(
             'id' => $val['id'],
-            'user_id' => $val['from']['id'],
+            'user' => $val['from'],
             'message' => $val['message'], 
             'link' => array_key_exists('link',$val) ? $val['link'] : '',
             'comment' => $this->getComments( $val['comments'] ),
@@ -37,7 +37,7 @@ class Cleaner {
       $list = $in['data'];
       foreach( $list as $val ){
          $out[] = array(
-            'user_id' => $val['from']['id'],
+            'user' => $val['from'],
             'comment' => $val['message']
          );
       }
