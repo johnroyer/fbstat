@@ -53,7 +53,7 @@ class Cleaner {
       foreach( $list as $val ){
          $out[] = $val['id'];
       }
-      return $out;
+      return $list;
    }
 
 }
