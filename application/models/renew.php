@@ -31,13 +31,16 @@ class Renew extends CI_Model {
 
    private function newComment($art_id, $data){
       $updated = 0;
-      foreach($data as $co){
-         $commentData = array(
-            'article_id' => $art_id ,
-            'user_id' => $this->getUserId($co['user']),
-            'comment' => $co['comment']
-         );
-         $updated += $this->insert('comment', $commentData);
+
+      if( is_array($data) ){
+         foreach($data as $co){
+            $commentData = array(
+               'article_id' => $art_id ,
+               'user_id' => $this->getUserId($co['user']),
+               'comment' => $co['comment']
+            );
+            $updated += $this->insert('comment', $commentData);
+         }
       }
       return $updated;
    }
