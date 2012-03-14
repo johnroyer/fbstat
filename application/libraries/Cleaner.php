@@ -21,8 +21,8 @@ class Cleaner {
             'user' => $val['from'],
             'message' => array_key_exists('message',$val) ? $val['message'] : ' ', 
             'link' => array_key_exists('link',$val) ? $val['link'] : ' ',
-            'comment' => $this->getComments( $val['comments'] ),
-            'like' => $this->getLikes( $val['likes'] )
+            'comment' => array_key_exists('comments',$val) ? $this->getComments( $val['comments'] ) : ' ',
+            'like' => array_key_exists('likes',$val) ? $this->getLikes( $val['likes'] ) : ' '
          );
          $list[] = $art;
       }
