@@ -44,12 +44,31 @@ class Feed extends CI_Controller {
    }
 
    public function Update(){
+      $feedUri = $this->config->item('groupId').'/feed';
+      $this->load->library('cleaner');
+      $this->load->model('renew');
+
+      $updated = 0;
+      $json = $this->cleaner->jsonClean( $this->fb->api($feedUri) );
+      foreach( $json as $art ){
+         $updated += $this->renew->newArticle($art);
+      }
+      echo "$updated data updated";
+
       // Stat Update
       $data = array(
          'key' => 'lastupdate',
          'val' => time()
       );
       $this->db->update('stat', $data);
+   }
+
+   public function truncate(){
+      $this->db->query('TRUNCATE TABLE  `article`');
+      $this->db->query('TRUNCATE TABLE  `comment`');
+      $this->db->query('TRUNCATE TABLE  `like`');
+      $this->db->query('TRUNCATE TABLE  `user`');
+      echo "table truncated";
    }
 
    private function __isLogin(){
