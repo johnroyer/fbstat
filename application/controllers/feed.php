@@ -47,6 +47,7 @@ class Feed extends CI_Controller {
       $this->load->library('cleaner');
       $this->load->model('renew');
 
+      $start = microtime(true);
       $totalUpdate = 0;
       $feedUri = $this->config->item('groupId').'/feed';
       while( 1 ){
@@ -60,6 +61,7 @@ class Feed extends CI_Controller {
          $json = $this->cleaner->jsonClean( $feed );
          foreach( $json as $art ){
             $updated += $this->renew->newArticle($art);
+            $this->_updateLike($art['id']);
          }
          $totalUpdate += $updated;
 
@@ -76,7 +78,10 @@ class Feed extends CI_Controller {
             break;
          }
       }
-      echo "$totalUpdate data updated";
+      $end = microtime(true);
+
+      echo "$totalUpdate data updated <br>";
+      echo ($end - $start). " seconds spent";
 
       // Stat Update
       $data = array(
@@ -84,6 +89,26 @@ class Feed extends CI_Controller {
          'val' => time()
       );
       $this->db->update('stat', $data);
+   }
+
+   private function _updateLike($art_id){
+      $this->load->model('renew');
+      // api path: article_id/likes
+      $feedUri = $art_id.'/likes';
+      while(1){
+         $feed = $this->fb->api($feedUri);
+         if( empty($feed['data']) ){
+            // No data
+            break;
+         }
+
+         $this->renew->newLike($art_id, $feed['data']);
+
+         // Find next page
+         if( array_key_exists('next', $feed['paging']) ){
+            $feedUri = str_replace('https://graph.facebook.com/','',$feed['paging']['next']);
+         }
+      }
    }
 
    public function truncate(){

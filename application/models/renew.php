@@ -23,9 +23,6 @@ class Renew extends CI_Model {
       // Update Comments
       $updated += $this->newComment($data['id'], $comment);
 
-      // Update Likes
-      $updated += $this->newLike($data['id'], $like);
-
       return $updated;
    }
 
@@ -46,7 +43,7 @@ class Renew extends CI_Model {
       return $updated;
    }
    
-   private function newLike($art_id, $data){
+   public function newLike($art_id, $data){
       $updated = 0;
       if( is_array($data) ){
          foreach( $data as $user ){
