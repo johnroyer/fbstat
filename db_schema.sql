@@ -44,11 +44,12 @@ CREATE TABLE IF NOT EXISTS `article` (
 --
 
 CREATE TABLE IF NOT EXISTS `comment` (
-  `article_id` varchar(60) NOT NULL,
-  `user_id` varchar(30) NOT NULL,
-  `comment` varchar(2000) NOT NULL,
-  PRIMARY KEY (`article_id`,`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+     `article_id` varchar(60) NOT NULL,
+     `user_id` varchar(30) NOT NULL,
+     `initial` varchar(100) NOT NULL,
+     `comment` varchar(2000) NOT NULL,
+     PRIMARY KEY (`article_id`,`user_id`,`initial`)
+   ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
