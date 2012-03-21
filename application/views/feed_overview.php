@@ -20,7 +20,7 @@
       
       <p></p>
       <p>
-         <a>Update database</a> ...... 
+         <a href="index.php/feed/update/">Update database</a> ...... 
          <a href="<?php echo $logoutUrl; ?>">Logout</a>
       </p>
 
