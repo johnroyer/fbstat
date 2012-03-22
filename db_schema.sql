@@ -30,7 +30,7 @@ USE `fbstat`;
 
 CREATE TABLE IF NOT EXISTS `article` (
   `id` varchar(60) NOT NULL,
-  `user_id` int(30) NOT NULL,
+  `user_id` varchar(30) NOT NULL,
   `message` varchar(2000) NOT NULL,
   `link` varchar(2048) NOT NULL,
   PRIMARY KEY (`id`),
@@ -44,12 +44,12 @@ CREATE TABLE IF NOT EXISTS `article` (
 --
 
 CREATE TABLE IF NOT EXISTS `comment` (
-     `article_id` varchar(60) NOT NULL,
-     `user_id` varchar(30) NOT NULL,
-     `initial` varchar(100) NOT NULL,
-     `comment` varchar(2000) NOT NULL,
-     PRIMARY KEY (`article_id`,`user_id`,`initial`)
-   ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `article_id` varchar(60) NOT NULL,
+  `user_id` varchar(30) NOT NULL,
+  `initial` varchar(100) NOT NULL,
+  `comment` varchar(2000) NOT NULL,
+  PRIMARY KEY (`article_id`,`user_id`,`initial`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
