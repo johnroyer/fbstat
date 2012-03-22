@@ -1,4 +1,8 @@
-<h3>概況</h3>
+<p>
+   文章數：<?php echo $article; ?> &nbsp;&nbsp;&nbsp;&nbsp;
+   回覆數：<?php echo $comment; ?> &nbsp;&nbsp;&nbsp;&nbsp;
+   讚：<?php echo $like;?>
+</p>
 
 <table>
 <tr>

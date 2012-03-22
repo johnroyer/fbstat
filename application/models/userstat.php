@@ -40,6 +40,21 @@ class Userstat extends CI_Model {
       return $this->db->count_all_results();
    }
 
+   public function getTotalArticle(){
+      $this->db->from('article');
+      return $this->db->count_all_results();
+   }
+
+   public function getTotalComment(){
+      $this->db->from('comment');
+      return $this->db->count_all_results();
+   }
+
+   public function getTotalLike(){
+      $this->db->from('like');
+      return $this->db->count_all_results();
+   }
+
 }
 
 
