@@ -55,6 +55,28 @@ class Userstat extends CI_Model {
       return $this->db->count_all_results();
    }
 
+   public function commentMost(){
+      $sql  = 'select a.id, c.name, a.message, count(b.comment) ';
+      $sql .= 'from `comment` as b ';
+      $sql .= 'inner join `article` as a on a.id = b.article_id ';
+      $sql .= 'inner join `user` as c on b.user_id = c.id ';
+      $sql .= 'group by a.id, c.id ';
+      $sql .= 'order by count(b.comment) desc ';
+
+      $query = $this->db->query($sql);
+      $list = array();
+
+      foreach($query->result_array() as $row ){
+         $list[] = array(
+            'id' => $row['id'],
+            'name' => $row['name'],
+            'message' => mb_substr($row['message'], 0, 50),
+            'comment' => $row['count(b.comment)'] 
+         );
+      }
+      return $list;
+   }
+
 }
 
 

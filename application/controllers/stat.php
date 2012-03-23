@@ -43,4 +43,14 @@ class Stat extends CI_Controller {
       $this->load->view('artComment', array('list' => $list) );
       $this->load->view('stat_foot');
    }
+
+   public function commentMost(){
+      $this->load->model('userstat');
+
+      $list = $this->userstat->commentMost();
+
+      $this->load->view('stat_head');
+      $this->load->view('commentMost', array('list' => $list) );
+      $this->load->view('stat_foot');
+   }
 }

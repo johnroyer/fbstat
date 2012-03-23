@@ -43,6 +43,10 @@ td {
    <?php echo anchor('stat/artcomment', '熱門文章 (回覆)'); ?>
 </div>
    
+<div class="nav">
+   <?php echo anchor('stat/commentmost', '回覆踴躍'); ?>
+</div>
+
 <div style="clear: both; height:0px; border-bottom: 1px solid black;"></div>
 
 <p> &nbsp; </p>
