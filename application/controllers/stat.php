@@ -16,10 +16,10 @@ class Stat extends CI_Controller {
          'article' => $this->userstat->getTotalArticle(),
          'comment' => $this->userstat->getTotalComment(),
          'like' => $this->userstat->getTotalLike(),
-         'list' => $this->userstat->getUserStat()
+         'list' => $this->userstat->getUserStat(),
       );
 
-      $this->load->view('stat_head');
+      $this->load->view('stat_head', array('title'=>'概況'));
       $this->load->view('stat_body_list', $data);
       $this->load->view('stat_foot');
    }
@@ -29,7 +29,7 @@ class Stat extends CI_Controller {
 
       $list = $this->articlestat->byLike();
 
-      $this->load->view('stat_head');
+      $this->load->view('stat_head', array('title'=>'熱門文章(讚)') );
       $this->load->view('artLike', array('list' => $list) );
       $this->load->view('stat_foot');
    }
@@ -39,7 +39,7 @@ class Stat extends CI_Controller {
 
       $list = $this->articlestat->byComment();
 
-      $this->load->view('stat_head');
+      $this->load->view('stat_head', array('title'=>'熱門文章(回覆)') );
       $this->load->view('artComment', array('list' => $list) );
       $this->load->view('stat_foot');
    }
@@ -49,7 +49,7 @@ class Stat extends CI_Controller {
 
       $list = $this->userstat->commentMost();
 
-      $this->load->view('stat_head');
+      $this->load->view('stat_head', array('title'=>'回覆踴躍') );
       $this->load->view('commentMost', array('list' => $list) );
       $this->load->view('stat_foot');
    }
