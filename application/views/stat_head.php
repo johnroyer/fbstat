@@ -1,9 +1,14 @@
+<?php
+   $this->load->helper('url');
+?>
+
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
    <title><?php echo $title; ?></title>
    
+<link rel=stylesheet type="text/css" href="<?php echo base_url('css/DatePicker.css'); ?>">
 <style type="text/css">
 table {
    border-collapse:collapse;
@@ -24,6 +29,17 @@ td {
    font-size: 16px;
 }
 </style>
+
+<script type="text/javascript" src="<?php echo base_url('js/mootools.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('js/DatePicker.js'); ?>"></script>
+
+<script type="text/javascript">
+window.addEvent('domready', function(){
+   $$('input.DatePicker').each( function(el){
+      new DatePicker(el);
+   });
+});
+</script>
 
 </head>
 
@@ -49,4 +65,7 @@ td {
 
 <div style="clear: both; height:0px; border-bottom: 1px solid black;"></div>
 
+<?php $this->load->view('date_selector'); ?>
+
 <p> &nbsp; </p>
+
