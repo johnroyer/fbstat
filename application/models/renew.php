@@ -34,6 +34,7 @@ class Renew extends CI_Model {
             $commentData = array(
                'article_id' => $art_id ,
                'user_id' => $this->getUserId($co['user']),
+               'created_time' => $co['created_time'],
                'initial' => substr($co['comment'], 0, 100),
                'comment' => $co['comment']
             );
@@ -45,11 +46,13 @@ class Renew extends CI_Model {
    
    public function newLike($art_id, $data){
       $updated = 0;
+      $timestamp = time();
       if( is_array($data) ){
          foreach( $data as $user ){
             $db = array(
                'article_id' => $art_id ,
-               'user_id' => $this->getUserId($user)
+               'user_id' => $this->getUserId($user),
+               'created_time' => $timestamp
             );
             $updated += $this->insert('like', $db);
          }

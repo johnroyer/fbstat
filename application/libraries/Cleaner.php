@@ -20,6 +20,7 @@ class Cleaner {
          $art = array(
             'id' => $val['id'],
             'user' => $val['from'],
+            'created_time' => strtotime($val['created_time']),
             'message' => array_key_exists('message',$val) ? $val['message'] : ' ', 
             'link' => array_key_exists('link',$val) ? $val['link'] : ' ',
             'comment' => array_key_exists('comments',$val) ? $this->getComments( $val['comments'] ) : ' ',
@@ -39,7 +40,8 @@ class Cleaner {
       foreach( $list as $val ){
          $out[] = array(
             'user' => $val['from'],
-            'comment' => $val['message']
+            'comment' => $val['message'],
+            'created_time' => strtotime($val['created_time'])
          );
       }
       return $out;
