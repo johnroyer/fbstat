@@ -1,3 +1,9 @@
+<?php
+
+   $this->load->helper('url');
+
+?>
+
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -20,7 +26,8 @@
       
       <p></p>
       <p>
-         <a href="index.php/feed/update/">Update database</a> ...... 
+         <?php echo anchor('feed/update', '更新資料庫'); ?> ...... 
+         <?php echo anchor('stat', '統計資料'); ?> ..... 
          <a href="<?php echo $logoutUrl; ?>">Logout</a>
       </p>
 
