@@ -37,7 +37,10 @@ class Feed extends CI_Controller {
 
       }else{
          $data['isLogin'] = 'false';
-         $data['loginUrl'] = $this->fb->getLoginUrl();
+         $param = array(
+            'scope' => 'user_groups, friends_groups'
+         );
+         $data['loginUrl'] = $this->fb->getLoginUrl($param);
       }
 
       $this->load->view('feed_overview', $data);
