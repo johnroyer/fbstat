@@ -63,6 +63,10 @@ window.addEvent('domready', function(){
    <?php echo anchor('stat/commentmost', '回覆踴躍'); ?>
 </div>
 
+<div class="nav">
+   <?php echo anchor('', '回社團資訊列表'); ?>
+</div>
+
 <div style="clear: both; height:0px; border-bottom: 1px solid black;"></div>
 
 <?php $this->load->view('date_selector'); ?>
